@@ -6,6 +6,12 @@ __pycache__/
 # C extensions
 *.so
 
+.ipynb_checkpoints
+rec_sys/.ipynb_checkpoints
+rec_sys/.DS_Store
+*.ipynb_checkpoints
+*.DS_Store
+
 # Distribution / packaging
 .Python
 build/
