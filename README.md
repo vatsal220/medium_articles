@@ -2,6 +2,7 @@
 This repository will contain the code associated to the scripts I've been writing in my medium articles
 
 ## Articles
+- https://towardsdatascience.com/dimensionality-reduction-explained-5ae45ae3058e
 - https://towardsdatascience.com/word2vec-explained-49c52b4ccb71
 - https://towardsdatascience.com/recommendation-systems-explained-a42fc60591ed
 - https://towardsdatascience.com/bayesian-a-b-testing-explained-344a6df88c1a
