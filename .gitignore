@@ -6,6 +6,8 @@ __pycache__/
 # C extensions
 *.so
 
+.env
+./twitter/.env
 .ipynb_checkpoints
 rec_sys/.ipynb_checkpoints
 rec_sys/.DS_Store
