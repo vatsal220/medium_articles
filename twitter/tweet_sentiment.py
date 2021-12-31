@@ -66,3 +66,148 @@ api = connect_twitter(
     access_token = os.getenv("twitter_access_token"),
     secret_access_token = os.getenv("twitter_access_token_secret")
 )
+
+def mk_dir(path, date):
+    '''
+    The purpose of this function is to make a directory if one does not exist of the current
+    date in the data folder.
+    
+    params:
+        path (String) : The path to the data folder
+        date (String) : The current date yyyy-mm-dd
+        
+    returns:
+        This function will do nothing if the folder already exists, otherwise it will create
+        the folder
+    
+    example:
+        mk_dir(path = './data/', date = '2021-09-23')
+    '''
+    
+    # check if directory exists 
+    exists = os.path.exists(path + date)
+    
+    if not exists:
+        os.makedirs(path + date)
+        print("New Directory Created")
+        
+def get_all_tweets(screen_name, api = api, today = today):
+    '''
+    This function will get the latest ~3200 tweets associated to a twitter screen name.
+    It will proceed to get the tweet id, created at and the content and store it in a df.
+    It will save the associated results in a CSV file.
+    
+    params:
+        screen_name (String) : The twitter handle associated to the user you want to get
+                               tweets from
+        api (API) : The tweepy API connection
+        today (String) : Todays date in string format
+    
+    returns:
+        This function will return a df associated to the tweet id, created_at and content
+        
+    source:
+        [yanofsky](https://gist.github.com/yanofsky/5436496)
+    '''
+    #initialize a list to hold all the tweepy Tweets
+    alltweets = []  
+    
+    #make initial request for most recent tweets (200 is the maximum allowed count)
+    new_tweets = api.user_timeline(screen_name = screen_name,count=200)
+    
+    #save most recent tweets
+    alltweets.extend(new_tweets)
+    
+    #save the id of the oldest tweet less one
+    oldest = alltweets[-1].id - 1
+    
+    #keep grabbing tweets until there are no tweets left to grab
+    while len(new_tweets) > 0:
+#         print(f"getting tweets before {oldest}")
+        
+        #all subsiquent requests use the max_id param to prevent duplicates
+        new_tweets = api.user_timeline(screen_name = screen_name,count=200,max_id=oldest)
+        
+        #save most recent tweets
+        alltweets.extend(new_tweets)
+        
+        #update the id of the oldest tweet less one
+        oldest = alltweets[-1].id - 1
+        
+#         print(f"...{len(alltweets)} tweets downloaded so far")
+    
+    #transform the tweepy tweets into a 2D array that will populate the csv 
+    outtweets = [
+        [
+            t.author.name, t.id_str, t.created_at, t.text, t.entities.get('hashtags'), t.author.location,
+            t.author.created_at, t.author.url, t.author.screen_name, t.favorite_count, t.favorited,
+            t.retweet_count, t.retweeted, t.author.followers_count, t.author.friends_count
+        ] for t in alltweets
+    ]
+    
+    #write the csv  
+    cols = [
+        'author_name', 'tweet_id', 'tweet_created_at', 'content', 'hashtags', 'location',
+        'author_created_at', 'author_url', 'author_screen_name', 'tweet_favourite_count', 'tweet_favourited', 
+        'retweet_count', 'retweeted', 'author_followers_count', 'author_friends_count'
+    ]
+    df = pd.DataFrame(outtweets, columns = cols)
+    mk_dir(path = './data/', date = today)
+    df.to_csv('./data/{}/{}_tweets_{}.csv'.format(today, screen_name, today), index = False)
+    time.sleep(10)
+    return df
+def read_tweet_data(path):
+    '''
+    This function will identify if todays data has already been scraped from the twitter API.
+        - If it has been scraped, this function will read all the scraped data from today 
+           and previous days
+    Upon fetching all the data, it will drop duplicates on the tweet_id and tweet_created_at
+    columns to remove duplicated tweets scraped from previous days.
+    
+    params:
+        path (String) : The path to the data folder
+        today (String) : Today's date in string format yyyy-mm-dd
+        
+    returns:
+        This function will return the tweets_df associated to tweets from all handles over 
+        the past few months
+        
+    example:
+        read_tweet_data(
+            path = './data/'
+        )
+    '''
+    
+    # get all non hidden subdirectories from the path
+    sub_dir = [d for d in os.listdir(path) if d[0] != '.']
+    
+    # read csv from all sub directories and concat results
+    files = []
+    for d in sub_dir:
+        for p in os.listdir(path + d):
+            if p[0] != '.':
+                files.append(path + d + '/' + p)
+
+    read_csvs = []
+    for file in files:
+        read_csvs.append(pd.read_csv(file, converters={'hashtags': eval}, encoding='utf-8-sig'))
+
+    read_csvs = pd.concat(read_csvs)
+    tweets_df = read_csvs.drop_duplicates(subset = ['tweet_id', 'tweet_created_at'])
+    return tweets_df
+
+# handles we're scraping
+handles = [
+    'TorontoPolice', 'HamiltonPolice', 'YRP', 'PeelPolice'
+]
+
+if today not in os.listdir():
+    for user in handles:
+        print(user)
+        _ = get_all_tweets(user)
+
+tweets_df = read_tweet_data(
+    path = './data/'
+)
+print(tweets_df.shape)
+
