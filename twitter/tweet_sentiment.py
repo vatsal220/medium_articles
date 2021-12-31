@@ -201,7 +201,7 @@ handles = [
     'TorontoPolice', 'HamiltonPolice', 'YRP', 'PeelPolice'
 ]
 
-if today not in os.listdir():
+if today not in os.listdir('./data/'):
     for user in handles:
         print(user)
         _ = get_all_tweets(user)
@@ -211,3 +211,60 @@ tweets_df = read_tweet_data(
 )
 print(tweets_df.shape)
 
+def remove_punctuation(tweet):
+    '''
+    This function will remove all punctuations from the tweet passed in
+    '''
+    return ''.join(ch for ch in tweet if ch not in set(string.punctuation))
+
+def remove_sw(tweet):
+    '''
+    This function will remove all stopwords from the tweet passed in
+    '''
+    sw = [
+        'ourselves', 'hers', 'between', 'yourself', 'but', 'again', 'there', 'about', 'once', 'during', 'out',
+ 'very', 'having', 'with', 'they', 'own', 'an', 'be', 'some', 'for', 'do', 'its', 'yours', 'such', 'into', 'of',
+ 'most', 'itself', 'other', 'off', 'is', 'am', 'or', 'who', 'as', 'from', 'him', 'each', 'the', 'themselves', 'until',
+ 'below', 'are', 'we', 'these', 'your', 'his', 'through', 'don', 'nor', 'me', 'were', 'her', 'more', 'himself', 'this',
+ 'down', 'should', 'our', 'their', 'while', 'above', 'both', 'up', 'to', 'ours', 'had', 'she', 'all', 'no', 'when', 'at',
+ 'any', 'before', 'them', 'same', 'and', 'been', 'have', 'in', 'will', 'on', 'does', 'yourselves', 'then', 'that', 'because',
+ 'what', 'over', 'why', 'so', 'can', 'did', 'not', 'now', 'under', 'he', 'you', 'herself', 'has', 'just', 'where', 'too',
+ 'only', 'myself', 'which', 'those', 'i', 'after', 'few',
+ 'whom', 't', 'being', 'if', 'theirs', 'my', 'against', 'a', 'by', 'doing', 'it', 'how', 'further', 'was', 'here', 'than'
+    ]
+    tweet=tweet.lower()
+    tweet = ' '.join([w for w in tweet.split(' ') if w not in sw])
+    return tweet
+  
+tweets_df['cleaned_tweet'] = tweets_df['content'].apply(remove_punctuation)
+tweets_df['cleaned_tweet'] = tweets_df['content'].apply(remove_sw)
+
+def tweet_sentiment(tweet):
+    '''
+    Identify the sentiment associated to a tweet.
+    
+    params:
+        tweet (String) : The stirng you want the sentiment of
+        
+    returns:
+        A score between -1 and 1, where values greater than 0
+        would indicate a positive sentiment and values less
+        than 0 would be negative. Values = 0 is a neutral
+        sentiment tweet.
+    '''
+    tb = TextBlob(tweet)
+    score = tb.sentiment.polarity
+    if score > 0:
+        return 'Positive'
+    elif score < 0:
+        return 'Negative'
+    else:
+        return 'Neutral'
+      
+tweets_df['tweet_sentiment'] = tweets_df['cleaned_tweet'].apply(tweet_sentiment)
+
+plt.clf()
+tweets_df['tweet_sentiment'].value_counts().plot(kind = 'barh')
+plt.title('Sentiment of Tweets')
+plt.xlabel('Frequency of Tweet Sentiment')
+plt.show()
