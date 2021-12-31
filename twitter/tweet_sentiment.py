@@ -11,12 +11,6 @@ from textblob import TextBlob
 from datetime import datetime
 from dotenv import load_dotenv
 
-# constants
-PATH = os.path.expanduser('~') + '/'
-env_file = '.env'
-today = datetime.today().strftime('%Y-%m-%d')
-
-# read environment file
 def env_reader(env_path):
     '''
     This function will read the environment variables given the location of where the
@@ -26,9 +20,6 @@ def env_reader(env_path):
         return print('Environment File Not Found')
     return print('Loaded!')
 
-env_reader(os.getcwd() + '/' + env_file)
-
-# connect to twitter API
 def connect_twitter(api_key, secret_key, access_token, secret_access_token):
     '''
     This function will create a connection to the twitter api using the necessary
@@ -60,13 +51,6 @@ def connect_twitter(api_key, secret_key, access_token, secret_access_token):
         print("Failed to connect to Twitter.")
     return api
 
-api = connect_twitter(
-    api_key = os.getenv("twitter_api_key"), 
-    secret_key = os.getenv("twitter_secret"),
-    access_token = os.getenv("twitter_access_token"),
-    secret_access_token = os.getenv("twitter_access_token_secret")
-)
-
 def mk_dir(path, date):
     '''
     The purpose of this function is to make a directory if one does not exist of the current
@@ -91,7 +75,7 @@ def mk_dir(path, date):
         os.makedirs(path + date)
         print("New Directory Created")
         
-def get_all_tweets(screen_name, api = api, today = today):
+def get_all_tweets(screen_name, api, today):
     '''
     This function will get the latest ~3200 tweets associated to a twitter screen name.
     It will proceed to get the tweet id, created at and the content and store it in a df.
@@ -156,6 +140,7 @@ def get_all_tweets(screen_name, api = api, today = today):
     df.to_csv('./data/{}/{}_tweets_{}.csv'.format(today, screen_name, today), index = False)
     time.sleep(10)
     return df
+
 def read_tweet_data(path):
     '''
     This function will identify if todays data has already been scraped from the twitter API.
@@ -196,21 +181,6 @@ def read_tweet_data(path):
     tweets_df = read_csvs.drop_duplicates(subset = ['tweet_id', 'tweet_created_at'])
     return tweets_df
 
-# handles we're scraping
-handles = [
-    'TorontoPolice', 'HamiltonPolice', 'YRP', 'PeelPolice'
-]
-
-if today not in os.listdir('./data/'):
-    for user in handles:
-        print(user)
-        _ = get_all_tweets(user)
-
-tweets_df = read_tweet_data(
-    path = './data/'
-)
-print(tweets_df.shape)
-
 def remove_punctuation(tweet):
     '''
     This function will remove all punctuations from the tweet passed in
@@ -235,9 +205,6 @@ def remove_sw(tweet):
     tweet=tweet.lower()
     tweet = ' '.join([w for w in tweet.split(' ') if w not in sw])
     return tweet
-  
-tweets_df['cleaned_tweet'] = tweets_df['content'].apply(remove_punctuation)
-tweets_df['cleaned_tweet'] = tweets_df['content'].apply(remove_sw)
 
 def tweet_sentiment(tweet):
     '''
@@ -260,11 +227,51 @@ def tweet_sentiment(tweet):
         return 'Negative'
     else:
         return 'Neutral'
-      
-tweets_df['tweet_sentiment'] = tweets_df['cleaned_tweet'].apply(tweet_sentiment)
 
-plt.clf()
-tweets_df['tweet_sentiment'].value_counts().plot(kind = 'barh')
-plt.title('Sentiment of Tweets')
-plt.xlabel('Frequency of Tweet Sentiment')
-plt.show()
+def main():
+    # constants
+    PATH = os.path.expanduser('~') + '/'
+    env_file = '.env'
+    today = datetime.today().strftime('%Y-%m-%d')
+    
+    # read environment file
+    env_reader(os.getcwd() + '/' + env_file)
+
+    # connect to twitter API
+    api = connect_twitter(
+        api_key = os.getenv("twitter_api_key"), 
+        secret_key = os.getenv("twitter_secret"),
+        access_token = os.getenv("twitter_access_token"),
+        secret_access_token = os.getenv("twitter_access_token_secret")
+    )
+
+    # handles we're scraping
+    handles = [
+        'TorontoPolice', 'HamiltonPolice', 'YRP', 'PeelPolice'
+    ]
+
+    if today not in os.listdir('./data/'):
+        for user in handles:
+            print(user)
+            _ = get_all_tweets(user, api, today)
+
+    tweets_df = read_tweet_data(
+        path = './data/'
+    )
+    print(tweets_df.shape)
+    
+    # clean tweets
+    tweets_df['cleaned_tweet'] = tweets_df['content'].apply(remove_punctuation)
+    tweets_df['cleaned_tweet'] = tweets_df['content'].apply(remove_sw)
+    
+    # get sentiments
+    tweets_df['tweet_sentiment'] = tweets_df['cleaned_tweet'].apply(tweet_sentiment)
+
+    plt.clf()
+    tweets_df['tweet_sentiment'].value_counts().plot(kind = 'barh')
+    plt.title('Sentiment of Tweets')
+    plt.xlabel('Frequency of Tweet Sentiment')
+    plt.show()
+    
+if __name__ == '__main__':
+    main()
