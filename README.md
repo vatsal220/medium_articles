@@ -1,4 +1,4 @@
-[![View on GitHub](https://img.shields.io/badge/GitHub-View_on_GitHub-blue?logo=GitHub)](https://github.com/vatsal220)  [![View on Medium](https://img.shields.io/badge/Medium-View%20on%20Medium-red?logo=medium)](https://vatsal12-p.medium.com/) [![Personal Website & Projects](https://img.shields.io/badge/Data%20Science%20Simplified-Daily%20Data%20Science%20Tips-green?logo=wordpress)](https://vatsalp.com/) 
+[![View on GitHub](https://img.shields.io/badge/GitHub-View_on_GitHub-blue?logo=GitHub)](https://github.com/vatsal220)  [![View on Medium](https://img.shields.io/badge/Medium-View%20on%20Medium-red?logo=medium)](https://vatsal12-p.medium.com/) [![Personal Website & Projects](https://img.shields.io/badge/Personal%20Website%20&%20Projects-green?logo=wordpress)](https://vatsalp.com/) 
 
 # [Machine Learning & Data Driven Topics](https://github.com/vatsal220/medium_articles)
 This repository consists of the codes associated to articles written in my [medium blog](https://medium.com/@vatsal12-p).  
