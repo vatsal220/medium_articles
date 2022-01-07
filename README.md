@@ -12,7 +12,7 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 4. [Classical ML](#classical-ml)
 5. [Stochastic Models](#stochastic-models)
 6. [Time Series](#time-series)
-7. [Recommendation Systems](#rec-sys)
+7. [Recommendation Systems](#recommendation-systems)
 8. [Literature Review](#literature-review)
 
 # Graph Networks
