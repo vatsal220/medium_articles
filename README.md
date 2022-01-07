@@ -1,5 +1,10 @@
-# medium_articles
-This repository will contain the code associated to the scripts I've been writing in my medium articles
+[![View on GitHub](https://img.shields.io/badge/GitHub-View_on_GitHub-blue?logo=GitHub)](https://github.com/vatsal220)  [![View on Medium](https://img.shields.io/badge/Medium-View%20on%20Medium-red?logo=medium)](https://vatsal12-p.medium.com/) [![Personal Website & Projects](https://img.shields.io/badge/Data%20Science%20Simplified-Daily%20Data%20Science%20Tips-green?logo=wordpress)](https://vatsalp.com/) 
+
+# [Machine Learning & Data Driven Topics](https://github.com/vatsal220/medium_articles)
+This repository consists of the codes associated to articles written in my [medium blog](https://medium.com/@vatsal12-p).  
+
+If you want to recieve updates when I post new articles, you can subscribe to [my newsletter](https://vatsal12-p.medium.com/subscribe). And if you were planning on purchasing a medium membership and want to support me, then you can start your membership through my [affiliate link](https://vatsal12-p.medium.com/membership).  
+
 
 ## Articles
 - https://vatsal12-p.medium.com/mining-modelling-character-networks-part-ii-a3d77de89638
