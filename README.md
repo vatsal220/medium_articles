@@ -14,11 +14,13 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 6. [Time Series](#time-series)
 7. [Recommendation Systems](#recommendation-systems)
 8. [Literature Review](#literature-review)
+9. [Projects](#projects)
 
 # Graph Networks
 
 | Title         | Article          | Repository  |
 | ------------- |:-------------:   |      :-----:|
+|Mining & Modelling Character Networks Part I | [Link](https://towardsdatascience.com/mining-modelling-character-networks-part-i-e37e4878c467) |
 |Mining & Modelling Character Networks Part II | [Link](https://vatsal12-p.medium.com/mining-modelling-character-networks-part-ii-a3d77de89638) | [Code](https://github.com/vatsal220/medium_articles/tree/main/character_networks) |
 |Random Walks with Restart Explained | [Link](https://towardsdatascience.com/random-walks-with-restart-explained-77c3fe216bca) | [Code](https://github.com/vatsal220/medium_articles/tree/main/rwr)
 
@@ -67,7 +69,11 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 # Literature Review
 | Title         | Article          | Repository  |
 | ------------- |:-------------:   |      :-----:|
-|Mining & Modelling Character Networks Part I | [Link](https://towardsdatascience.com/mining-modelling-character-networks-part-i-e37e4878c467) | |
+|Mining & Modelling Character Networks Part I | [Link](https://towardsdatascience.com/mining-modelling-character-networks-part-i-e37e4878c467) |
 |Word2Vec Explained | [Link](https://towardsdatascience.com/word2vec-explained-49c52b4ccb71) | [Code](https://github.com/vatsal220/medium_articles/tree/main/w2v)|
 
 
+# Projects
+| Title         | Article          | Repository  |
+| ------------- |:-------------:   |      :-----:|
+|Identifying Tweet Sentiment in Python | [Link](https://towardsdatascience.com/identifying-tweet-sentiment-in-python-7c37162c186b) | [Code](https://github.com/vatsal220/medium_articles/tree/main/twitter) | 
