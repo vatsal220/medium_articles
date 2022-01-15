@@ -58,6 +58,7 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 | Title         | Article          | Repository  |
 | ------------- |:-------------:   |      :-----:|
 |Monte Carlo Method Explained | [Link](https://towardsdatascience.com/monte-carlo-method-explained-8635edf2cf58) | [Code](https://github.com/vatsal220/medium_articles/tree/main/monte_carlo_method)|
+|Dynamic Time Warping Explained | [Link]() | [Code](https://github.com/vatsal220/medium_articles/tree/main/dtw)|
 
 
 # Recommendation Systems
@@ -76,4 +77,5 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 # Projects
 | Title         | Article          | Repository  |
 | ------------- |:-------------:   |      :-----:|
-|Identifying Tweet Sentiment in Python | [Link](https://towardsdatascience.com/identifying-tweet-sentiment-in-python-7c37162c186b) | [Code](https://github.com/vatsal220/medium_articles/tree/main/twitter) | 
+|Identifying Tweet Sentiment in Python | [Link](https://towardsdatascience.com/identifying-tweet-sentiment-in-python-7c37162c186b) | [Code](https://github.com/vatsal220/medium_articles/tree/main/twitter) |
+|Salary Analysis | [Link]() | [Code](https://github.com/vatsal220/medium_articles/tree/main/salary_analytics) |
