@@ -1,0 +1,5 @@
+pandas=1.2.4
+scipy=1.6.2
+matplotlib=3.3.4
+sklearn=0.24.1
+uuid=1.30
