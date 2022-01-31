@@ -22,7 +22,8 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 | ------------- |:-------------:   |      :-----:|
 |Mining & Modelling Character Networks Part I | [Link](https://towardsdatascience.com/mining-modelling-character-networks-part-i-e37e4878c467) |
 |Mining & Modelling Character Networks Part II | [Link](https://vatsal12-p.medium.com/mining-modelling-character-networks-part-ii-a3d77de89638) | [Code](https://github.com/vatsal220/medium_articles/tree/main/character_networks) |
-|Random Walks with Restart Explained | [Link](https://towardsdatascience.com/random-walks-with-restart-explained-77c3fe216bca) | [Code](https://github.com/vatsal220/medium_articles/tree/main/rwr)
+|Random Walks with Restart Explained | [Link](https://towardsdatascience.com/random-walks-with-restart-explained-77c3fe216bca) | [Code](https://github.com/vatsal220/medium_articles/tree/main/rwr) |
+|Node2Vec Explained | [Link]() | [Code](https://github.com/vatsal220/medium_articles/blob/main/n2v/n2v.ipynb)
 
 # NLP
 | Title         | Article          | Repository  |
@@ -58,7 +59,7 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 | Title         | Article          | Repository  |
 | ------------- |:-------------:   |      :-----:|
 |Monte Carlo Method Explained | [Link](https://towardsdatascience.com/monte-carlo-method-explained-8635edf2cf58) | [Code](https://github.com/vatsal220/medium_articles/tree/main/monte_carlo_method)|
-|Dynamic Time Warping Explained | [Link]() | [Code](https://github.com/vatsal220/medium_articles/tree/main/dtw)|
+|Dynamic Time Warping Explained | [Link](https://medium.com/r?url=https%3A%2F%2Fpub.towardsai.net%2Fdynamic-time-warping-explained-fbb24c1e079b) | [Code](https://github.com/vatsal220/medium_articles/tree/main/dtw)|
 
 
 # Recommendation Systems
