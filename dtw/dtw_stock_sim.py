@@ -60,20 +60,14 @@ def main():
         date_map = {date:idx for idx, date in enumerate(dates)}
 
         dfs[ticker]['benchmark_date'] = dfs[ticker].index.map(date_map)
-    
-    # identify the minimum date difference available to conduct time series analysis on
-    days_diff = {
-        k:df.benchmark_date.max() - df.benchmark_date.min() for k,df in dfs.items()
-    }
-    max_range = min(days_diff.values())
-    
-    # update dfs to be between 0 and max_range
-    dfs = {k:df[df['benchmark_date'].between(0, max_range)] for k,df in dfs.items()}
-    
-    benchmark = np.array(dfs['SHOP'].Close.values)
+        
+    shop_df = dfs['SHOP']
     distances = {}
     for k,v in dfs.items():
         if k != 'SHOP':
+            max_d = v['benchmark_date'].max()
+            benchmark = np.array(shop_df[shop_df['benchmark_date'].between(0, max_d)]['Close'].values)
+
             y = np.array(v.Close.values)
             d,p = fastdtw(benchmark, y)
             distances[k] = d
