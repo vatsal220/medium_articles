@@ -54,6 +54,22 @@ def main():
     visualize_close_prices(dfs)
     
     # find similar stocks
+    # benchmark the dates to start from 0
+    for ticker, df in dfs.items():
+        dates = df.index.values
+        date_map = {date:idx for idx, date in enumerate(dates)}
+
+        dfs[ticker]['benchmark_date'] = dfs[ticker].index.map(date_map)
+    
+    # identify the minimum date difference available to conduct time series analysis on
+    days_diff = {
+        k:df.benchmark_date.max() - df.benchmark_date.min() for k,df in dfs.items()
+    }
+    max_range = min(days_diff.values())
+    
+    # update dfs to be between 0 and max_range
+    dfs = {k:df[df['benchmark_date'].between(0, max_range)] for k,df in dfs.items()}
+    
     benchmark = np.array(dfs['SHOP'].Close.values)
     distances = {}
     for k,v in dfs.items():
