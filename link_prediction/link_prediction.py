@@ -10,11 +10,6 @@ from itertools import product
 from sklearn.metrics.pairwise import cosine_similarity
 from node2vec import Node2Vec as n2v
 
-# constants
-queries = [
-    'automl', 'machinelearning', 'data', 'phyiscs','mathematics', 'recommendation system', 'nlp', 'neural networks'
-]
-
 def search_arxiv(queries, max_results = 100):
     '''
     This function will search arxiv associated to a set of queries and store
@@ -71,12 +66,7 @@ def search_arxiv(queries, max_results = 100):
     article_mapping = {art:idx for idx,art in enumerate(unique_article_ids)}
     d['article_id'] = d['article_id'].map(article_mapping)
     return d
-  
-research_df = search_arxiv(
-    queries = queries,
-    max_results = 100
-)
-print(research_df.shape)
+
 
 def generate_network(df, node_col = 'article_id', edge_col = 'main_topic'):
     '''
@@ -110,38 +100,6 @@ def generate_network(df, node_col = 'article_id', edge_col = 'main_topic'):
     # create nx network
     g = nx.Graph(edge_dct, create_using = nx.MultiGraph)
     return g
-  
-all_tp = research_df.explode('all_topics').copy()
-
-tp_nx = generate_network(
-    all_tp, 
-    node_col = 'article_id', 
-    edge_col = 'all_topics'
-)
-
-print(nx.info(tp_nx))
-
-g_emb = n2v(tp_nx, dimensions=16)
-
-WINDOW = 1 # Node2Vec fit window
-MIN_COUNT = 1 # Node2Vec min. count
-BATCH_WORDS = 4 # Node2Vec batch words
-
-mdl = g_emb.fit(
-    window=WINDOW,
-    min_count=MIN_COUNT,
-    batch_words=BATCH_WORDS
-)
-
-# create embeddings dataframe
-emb_df = (
-    pd.DataFrame(
-        [mdl.wv.get_vector(str(n)) for n in tp_nx.nodes()],
-        index = tp_nx.nodes
-    )
-)
-
-print(emb_df.head())
 
 def predict_links(G, df, article_id, N):
     '''
@@ -178,59 +136,110 @@ def predict_links(G, df, article_id, N):
     articles = [art[0] for art in similar_articles]
     return articles
   
-print("Recommended Links to Article: ", predict_links(G = tp_nx, df = emb_df, article_id = 1, N = 10))
+def main():
+    '''
+    Driver function
+    '''
+    # constants
+    queries = [
+        'automl', 'machinelearning', 'data', 'phyiscs','mathematics', 'recommendation system', 'nlp', 'neural networks'
+    ]
 
-unique_nodes = list(tp_nx.nodes())
-all_possible_edges = [(x,y) for (x,y) in product(unique_nodes, unique_nodes)]
+    WINDOW = 1 # Node2Vec fit window
+    MIN_COUNT = 1 # Node2Vec min. count
+    BATCH_WORDS = 4 # Node2Vec batch words
+    
+    # fetch data from arXiv
+    research_df = search_arxiv(
+        queries = queries,
+        max_results = 100
+    )
+    print(research_df.shape)
+    all_tp = research_df.explode('all_topics').copy()
+    
+    # create network
+    tp_nx = generate_network(
+        all_tp, 
+        node_col = 'article_id', 
+        edge_col = 'all_topics'
+    )
+    print(nx.info(tp_nx))
 
-# generate edge features for all pairs of nodes
-edge_features = [
-    (mdl.wv.get_vector(str(i)) + mdl.wv.get_vector(str(j))) for i,j in all_possible_edges
-]
+    # run node2vec
+    g_emb = n2v(tp_nx, dimensions=16)
 
-# get current edges in the network
-edges = list(tp_nx.edges())
+    mdl = g_emb.fit(
+        window=WINDOW,
+        min_count=MIN_COUNT,
+        batch_words=BATCH_WORDS
+    )
 
-# create target list, 1 if the pair exists in the network, 0 otherwise
-is_con = [1 if e in edges else 0 for e in all_possible_edges]
-print(sum(is_con))
+    # create embeddings dataframe
+    emb_df = (
+        pd.DataFrame(
+            [mdl.wv.get_vector(str(n)) for n in tp_nx.nodes()],
+            index = tp_nx.nodes
+        )
+    )
 
-# get training and target data
-X = np.array(edge_features)
-y = is_con
+    print(emb_df.head())
+    
+    print("Recommended Links to Article: ", predict_links(G = tp_nx, df = emb_df, article_id = 1, N = 10))
 
-# train test split
-x_train, x_test, y_train, y_test = train_test_split(
-  X,
-  y,
-  test_size = 0.3
-)
+    unique_nodes = list(tp_nx.nodes())
+    all_possible_edges = [(x,y) for (x,y) in product(unique_nodes, unique_nodes)]
 
-# GBC classifier
-clf = GradientBoostingClassifier()
+    # generate edge features for all pairs of nodes
+    edge_features = [
+        (mdl.wv.get_vector(str(i)) + mdl.wv.get_vector(str(j))) for i,j in all_possible_edges
+    ]
 
-# train the model
-clf.fit(x_train, y_train)
+    # get current edges in the network
+    edges = list(tp_nx.edges())
 
-y_pred = clf.predict(x_test)
-y_true = y_test
+    # create target list, 1 if the pair exists in the network, 0 otherwise
+    is_con = [1 if e in edges else 0 for e in all_possible_edges]
+    print(sum(is_con))
 
-y_pred = clf.predict(x_test)
-x_pred = clf.predict(x_train)
-test_acc = accuracy_score(y_test, y_pred)
-train_acc = accuracy_score(y_train, x_pred)
-print("Testing Accuracy : ", test_acc)
-print("Training Accuracy : ", train_acc)
+    # get training and target data
+    X = np.array(edge_features)
+    y = is_con
 
-print("MCC Score : ", matthews_corrcoef(y_true, y_pred))
+    # train test split
+    x_train, x_test, y_train, y_test = train_test_split(
+      X,
+      y,
+      test_size = 0.3
+    )
 
-print("Test Confusion Matrix : ")
-print(confusion_matrix(y_pred,y_test))
+    # GBC classifier
+    clf = GradientBoostingClassifier()
 
-print("Test Classification Report : ")
-print(classification_report(y_test, clf.predict(x_test)))
+    # train the model
+    clf.fit(x_train, y_train)
 
-pred_ft = [(mdl.wv.get_vector(str('42'))+mdl.wv.get_vector(str('210')))]
-print(clf.predict(pred_ft)[0])
+    y_pred = clf.predict(x_test)
+    y_true = y_test
 
-print(clf.predict_proba(pred_ft))
+    y_pred = clf.predict(x_test)
+    x_pred = clf.predict(x_train)
+    test_acc = accuracy_score(y_test, y_pred)
+    train_acc = accuracy_score(y_train, x_pred)
+    print("Testing Accuracy : ", test_acc)
+    print("Training Accuracy : ", train_acc)
+
+    print("MCC Score : ", matthews_corrcoef(y_true, y_pred))
+
+    print("Test Confusion Matrix : ")
+    print(confusion_matrix(y_pred,y_test))
+
+    print("Test Classification Report : ")
+    print(classification_report(y_test, clf.predict(x_test)))
+
+    pred_ft = [(mdl.wv.get_vector(str('42'))+mdl.wv.get_vector(str('210')))]
+    print(clf.predict(pred_ft)[0])
+
+    print(clf.predict_proba(pred_ft))
+    
+if __name__ == '__main__':
+    main()
