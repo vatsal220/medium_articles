@@ -17,18 +17,21 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 9. [Projects](#projects)
 
 # Graph Networks
-
 | Title         | Article          | Repository  |
 | ------------- |:-------------:   |      :-----:|
 |Mining & Modelling Character Networks Part I | [Link](https://towardsdatascience.com/mining-modelling-character-networks-part-i-e37e4878c467) |
 |Mining & Modelling Character Networks Part II | [Link](https://vatsal12-p.medium.com/mining-modelling-character-networks-part-ii-a3d77de89638) | [Code](https://github.com/vatsal220/medium_articles/tree/main/character_networks) |
 |Random Walks with Restart Explained | [Link](https://towardsdatascience.com/random-walks-with-restart-explained-77c3fe216bca) | [Code](https://github.com/vatsal220/medium_articles/tree/main/rwr) |
-|Node2Vec Explained | [Link]() | [Code](https://github.com/vatsal220/medium_articles/blob/main/n2v/n2v.ipynb)
+|Node2Vec Explained | [Link](https://towardsdatascience.com/node2vec-explained-db86a319e9ab) | [Code](https://github.com/vatsal220/medium_articles/blob/main/n2v/n2v.ipynb) |  
+|Linear Algebra Explained Through Graph Theory | [Link](https://towardsdatascience.com/linear-algebra-explained-through-graph-theory-1c79711e9a20) |  |
+|Link Prediction Recommendation Engines with Node2Vec | [Link](https://vatsal12-p.medium.com/link-prediction-recommendation-engines-with-node2vec-c97c429351a8) | [Code](https://github.com/vatsal220/medium_articles/blob/main/link_prediction/link_prediction.ipynb) |  
+
 
 # NLP
 | Title         | Article          | Repository  |
 | ------------- |:-------------:   |      :-----:|
 |Word2Vec Explained | [Link](https://towardsdatascience.com/word2vec-explained-49c52b4ccb71) | [Code](https://github.com/vatsal220/medium_articles/tree/main/w2v)|
+|Identifying Tweet Sentiment in Python | [Link](https://towardsdatascience.com/identifying-tweet-sentiment-in-python-7c37162c186b) | [Code](https://github.com/vatsal220/medium_articles/blob/main/twitter/tweet_sentiment.py)|   
 
 
 # AB Testing
@@ -46,6 +49,7 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 |K-Means Explained | [Link](https://towardsdatascience.com/k-means-explained-10349949bd10) | [Code](https://github.com/vatsal220/medium_articles/tree/main/kmeans) |
 |Random Forest Explained | [Link](https://towardsdatascience.com/random-forest-explained-6b4849d56a2f) | [Code](https://github.com/vatsal220/medium_articles/tree/main/random_forest)|
 |K Nearest Neighbours Explained | [Link](https://towardsdatascience.com/k-nearest-neighbours-explained-7c49853633b6) | [Code](https://github.com/vatsal220/medium_articles/tree/main/knn)|
+|Optimize Training and Predicting SK-Learn Models in Python with Sparse Matrices | [Link](https://towardsdatascience.com/optimize-training-predicting-sk-learn-models-in-python-with-sparse-matrices-1612072a025d) | [Code](https://github.com/vatsal220/medium_articles/blob/main/efficient_ml/efficient_ml.ipynb)|
 
 
 # Stochastic Models
@@ -66,6 +70,7 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 | Title         | Article          | Repository  |
 | ------------- |:-------------:   |      :-----:|
 |Recommendation Systems Explained | [Link](https://towardsdatascience.com/recommendation-systems-explained-a42fc60591ed) | [Code](https://github.com/vatsal220/medium_articles/tree/main/rec_sys)|
+|Link Prediction Recommendation Engines with Node2Vec | [Link](https://vatsal12-p.medium.com/link-prediction-recommendation-engines-with-node2vec-c97c429351a8) | [Code](https://github.com/vatsal220/medium_articles/blob/main/link_prediction/link_prediction.ipynb) | 
 
 
 # Literature Review
