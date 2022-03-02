@@ -25,13 +25,14 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 |Node2Vec Explained | [Link](https://towardsdatascience.com/node2vec-explained-db86a319e9ab) | [Code](https://github.com/vatsal220/medium_articles/blob/main/n2v/n2v.ipynb) |  
 |Linear Algebra Explained Through Graph Theory | [Link](https://towardsdatascience.com/linear-algebra-explained-through-graph-theory-1c79711e9a20) |  |
 |Link Prediction Recommendation Engines with Node2Vec | [Link](https://vatsal12-p.medium.com/link-prediction-recommendation-engines-with-node2vec-c97c429351a8) | [Code](https://github.com/vatsal220/medium_articles/blob/main/link_prediction/link_prediction.ipynb) |  
-
+|Text Summarization in Python w/ Jaro-Winkler Distance & PageRank | [Link](https://medium.com/towards-data-science/text-summarization-in-python-with-jaro-winkler-and-pagerank-72d693da94e8) | [Code](https://github.com/vatsal220/medium_articles/tree/main/graph_summarizer) |
 
 # NLP
 | Title         | Article          | Repository  |
 | ------------- |:-------------:   |      :-----:|
 |Word2Vec Explained | [Link](https://towardsdatascience.com/word2vec-explained-49c52b4ccb71) | [Code](https://github.com/vatsal220/medium_articles/tree/main/w2v)|
-|Identifying Tweet Sentiment in Python | [Link](https://towardsdatascience.com/identifying-tweet-sentiment-in-python-7c37162c186b) | [Code](https://github.com/vatsal220/medium_articles/blob/main/twitter/tweet_sentiment.py)|   
+|Identifying Tweet Sentiment in Python | [Link](https://towardsdatascience.com/identifying-tweet-sentiment-in-python-7c37162c186b) | [Code](https://github.com/vatsal220/medium_articles/blob/main/twitter/tweet_sentiment.py)|
+|Text Summarization in Python w/ Jaro-Winkler Distance & PageRank | [Link](https://medium.com/towards-data-science/text-summarization-in-python-with-jaro-winkler-and-pagerank-72d693da94e8) | [Code](https://github.com/vatsal220/medium_articles/tree/main/graph_summarizer) |
 
 
 # AB Testing
