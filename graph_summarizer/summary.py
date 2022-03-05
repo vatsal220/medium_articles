@@ -29,21 +29,26 @@ def clean_text(text, sw, punct):
         punct (List) : The slist of punctuations you wish to remove from the input text
         
     returns:
-        This function will return the input text after it's cleaned (the output will be a string)
+        This function will return the input text after it's cleaned (the output will be a string) and 
+        a dictionary mapping of the original sentences with its index
     '''
-    text = text.lower()
-    article = text.split(' ')
-    # clean stopwords
-    article = [x.lstrip().rstrip() for x in article if x not in sw]
-    article = [x for x in article if x]
-    article = ' '.join(article)
+    article = text.lower()
     
     # clean punctuations
     for pun in punct:
         article = article.replace(pun, '')
     
     article = article.replace("[^a-zA-Z]", " ").replace('\r\n', ' ').replace('\n', ' ')
-    return article
+    original_text_mapping = {k:v for k,v in enumerate(article.split('. '))}
+    
+    article = article.split(' ')
+    
+    # clean stopwords
+    article = [x.lstrip().rstrip() for x in article if x not in sw]
+    article = [x for x in article if x]
+    article = ' '.join(article)
+
+    return original_text_mapping, article
 
 def create_similarity_matrix(sentences):
     '''
@@ -99,7 +104,7 @@ def main():
     ]
     
     # clean data
-    cleaned_book = clean_text(book, sw, punct)
+    original_text_mapping, cleaned_book = clean_text(book, sw, punct)
 
     # get sentences
     sentences = [x for x in cleaned_book.split('. ') if x not in ['', ' ', '..', '.', '...']]
@@ -115,10 +120,9 @@ def main():
     pr_sentence_similarity = nx.pagerank(G)
 
     ranked_sentences = [
-        (sentences[sent], rank) for sent,rank in sorted(pr_sentence_similarity.items(), key=lambda item: item[1], reverse = True)
+        (original_text_mapping[sent], rank) for sent,rank in sorted(pr_sentence_similarity.items(), key=lambda item: item[1], reverse = True)
     ]
-
-    print(ranked_sentences[0])
+    print(ranked_sentences[0][0])
   
     # create summary
     N = 25
