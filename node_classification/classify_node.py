@@ -8,11 +8,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, matthews_corrcoef, confusion_matrix, classification_report
 from node2vec import Node2Vec as n2v
 
-# constants
-queries = [
-    'automl', 'machinelearning', 'data', 'phyiscs','mathematics', 'recommendation system', 'nlp', 'neural networks'
-]
-
 def search_arxiv(queries, max_results = 100):
     '''
     This function will search arxiv associated to a set of queries and store
@@ -69,13 +64,7 @@ def search_arxiv(queries, max_results = 100):
     article_mapping = {art:idx for idx,art in enumerate(unique_article_ids)}
     d['article_id'] = d['article_id'].map(article_mapping)
     return d
-  
-research_df = search_arxiv(
-    queries = queries,
-    max_results = 100
-)
 
-print(research_df.shape)
 
 def generate_network(df, node_col, edge_col):
     '''
@@ -109,62 +98,6 @@ def generate_network(df, node_col, edge_col):
     # create nx network
     g = nx.Graph(edge_dct, create_using = nx.MultiGraph)
     return g
-    
-tp_nx = generate_network(
-    research_df, 
-    node_col = 'article_id', 
-    edge_col = 'main_topic'
-)
-
-print(nx.info(tp_nx))
-
-g_emb = n2v(tp_nx, dimensions=16)
-
-WINDOW = 1 # Node2Vec fit window
-MIN_COUNT = 1 # Node2Vec min. count
-BATCH_WORDS = 4 # Node2Vec batch words
-
-mdl = g_emb.fit(
-    window=WINDOW,
-    min_count=MIN_COUNT,
-    batch_words=BATCH_WORDS
-)
-
-emb_df = (
-    pd.DataFrame(
-        [mdl.wv.get_vector(str(n)) for n in tp_nx.nodes()],
-        index = tp_nx.nodes
-    )
-)
-
-emb_df = emb_df.merge(
-    research_df[['article_id', 'main_topic']].set_index('article_id'),
-    left_index = True,
-    right_index = True
-)
-
-emb_df.head()
-
-print(emb_df.main_topic.value_counts().head(10))
-
-ft_cols = emb_df.drop(columns = ['main_topic']).columns.tolist()
-target_col = 'main_topic'
-
-# train test split
-x = emb_df[ft_cols].values
-y = emb_df[target_col].values
-
-x_train, x_test, y_train, y_test = train_test_split(
-    x, 
-    y,
-    test_size = 0.3
-)
-
-# GBC classifier
-clf = GradientBoostingClassifier()
-
-# train the model
-clf.fit(x_train, y_train)
 
 def clf_eval(clf, x_test, y_test):
     '''
@@ -194,7 +127,6 @@ def clf_eval(clf, x_test, y_test):
     y_true = y_test
     
     y_pred = clf.predict(x_test)
-    x_pred = clf.predict(x_train)
     test_acc = accuracy_score(y_test, y_pred)
     print("Testing Accuracy : ", test_acc)
     
@@ -204,13 +136,89 @@ def clf_eval(clf, x_test, y_test):
     print(classification_report(y_test, clf.predict(x_test)))
     
     print(confusion_matrix(y_pred,y_test))
-    
-clf_eval(
-    clf,
-    x_test,
-    y_test
-)
 
-# predict node classes using classification model
-pred_ft = [mdl.wv.get_vector(str('21'))]
-print(clf.predict(pred_ft)[0])
+
+def main():
+
+    # constants
+    queries = [
+        'automl', 'machinelearning', 'data', 'phyiscs','mathematics', 'recommendation system', 'nlp', 'neural networks'
+    ]
+  
+    research_df = search_arxiv(
+        queries = queries,
+        max_results = 100
+    )
+
+    print(research_df.shape)
+      
+    tp_nx = generate_network(
+        research_df, 
+        node_col = 'article_id', 
+        edge_col = 'main_topic'
+    )
+
+    print(nx.info(tp_nx))
+
+    g_emb = n2v(tp_nx, dimensions=16)
+
+    WINDOW = 1 # Node2Vec fit window
+    MIN_COUNT = 1 # Node2Vec min. count
+    BATCH_WORDS = 4 # Node2Vec batch words
+
+    mdl = g_emb.fit(
+        window=WINDOW,
+        min_count=MIN_COUNT,
+        batch_words=BATCH_WORDS
+    )
+
+    emb_df = (
+        pd.DataFrame(
+            [mdl.wv.get_vector(str(n)) for n in tp_nx.nodes()],
+            index = tp_nx.nodes
+        )
+    )
+
+    emb_df = emb_df.merge(
+        research_df[['article_id', 'main_topic']].set_index('article_id'),
+        left_index = True,
+        right_index = True
+    )
+
+    emb_df.head()
+
+    print(emb_df.main_topic.value_counts().head(10))
+
+    ft_cols = emb_df.drop(columns = ['main_topic']).columns.tolist()
+    target_col = 'main_topic'
+
+    # train test split
+    x = emb_df[ft_cols].values
+    y = emb_df[target_col].values
+
+    x_train, x_test, y_train, y_test = train_test_split(
+        x, 
+        y,
+        test_size = 0.3
+    )
+
+    # GBC classifier
+    clf = GradientBoostingClassifier()
+
+    # train the model
+    clf.fit(x_train, y_train)
+        
+    # evaluate model
+    clf_eval(
+        clf,
+        x_test,
+        y_test
+    )
+
+    # predict node classes using classification model
+    pred_ft = [mdl.wv.get_vector(str('21'))]
+    print(clf.predict(pred_ft)[0])
+    
+
+if __name__ == '__main__':
+    main()
