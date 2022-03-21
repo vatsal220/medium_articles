@@ -51,11 +51,12 @@ cmap = {
     1 : 'teal',
     2 : 'black', 
     3 : 'orange',
-    4 : 'green'
+    4 : 'green',
+    5 : 'yellow'
 }
 
 node_cmap = [cmap[v] for _,v in comms.items()]
 
 pos = nx.spring_layout(G)
-nx.draw(G, pos, node_size = 75, alpha = 0.8, node_color=node_colors)
+nx.draw(G, pos, node_size = 75, alpha = 0.8, node_color=node_cmap)
 plt.show()
