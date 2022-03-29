@@ -46,40 +46,6 @@ def generate_data(n = 1000):
     d = d.set_index('uuid')
     return d
   
-gender_df = generate_data(n = 1000)
-print(gender_df.shape)
-
-print(gender_df.head())
-
-print(gender_df.describe())
-
-print(gender_df['gender'].value_counts())
-
-train_df = gender_df[~gender_df['gender'].isna()].copy()
-pred_df = gender_df[gender_df['gender'].isna()].copy()
-print(train_df.shape, pred_df.shape)
-
-# feature, target breakdown
-ft_cols = train_df.drop(columns = ['gender']).columns.tolist()
-target_col = 'gender'
-
-# train test split
-x = train_df[ft_cols].values
-y = train_df[target_col].values
-
-x_train, x_test, y_train, y_test = train_test_split(
-    x, 
-    y,
-    test_size = 0.3
-)
-
-
-# GBC classifier
-clf = GradientBoostingClassifier()
-
-# train the model
-clf.fit(x_train, y_train)
-
 def clf_eval(clf, x_test, y_test):
     '''
     This function will evaluate a sk-learn multi-class classification model based on its
@@ -115,18 +81,7 @@ def clf_eval(clf, x_test, y_test):
     
     print("Classification Report : ")
     print(classification_report(y_test, clf.predict(x_test)))
-    
-    
-clf_eval(
-    clf,
-    x_test,
-    y_test
-)
 
-pred_df['pred_proba'] = pred_df[ft_cols].apply(lambda x : dict(
-    zip(clf.classes_, clf.predict_proba(x.values[None])[0])
-), axis = 1)
-pred_df['pred'] = pred_df[ft_cols].apply(lambda x : clf.predict(x.values[None])[0], axis = 1)
 
 # low predictions with threshold <= 0.6
 low_th = 0.6
@@ -165,48 +120,97 @@ def check_preds(pred_dct, low_th = low_th, high_th = high_th):
     else:
         return 'neither'
       
-pred_df['annotate_decision'] = pred_df['pred_proba'].apply(check_preds)
-print(pred_df['annotate_decision'].value_counts())
+def main():
+    gender_df = generate_data(n = 1000)
+    print(gender_df.shape)
 
-# breakdown pred_df to annotate and annotated
-annotated_df = pred_df[pred_df['annotate_decision'] == 'annotated'].copy()
-annotate_df = pred_df[pred_df['annotate_decision'] == 'annotate'].copy()
+    print(gender_df.head())
 
-# randomly generate annotation 
-gender_choices = ['Male', 'Female', np.nan, np.nan, np.nan]
-annotate_df['gender'] = [random.choice(gender_choices) for _ in range(annotate_df.shape[0])]
-annotate_df = annotate_df[~annotate_df['gender'].isna()].copy()
+    print(gender_df.describe())
 
-# update labelled data
-annotated_df['gender'] = annotated_df['pred']
-annotated_df = pd.concat([annotated_df, annotate_df, train_df])
-print(annotated_df.shape)
+    print(gender_df['gender'].value_counts())
 
-# feature, target breakdown
-ft_cols = ['height', 'weight', 'age']
-target_col = 'gender'
+    train_df = gender_df[~gender_df['gender'].isna()].copy()
+    pred_df = gender_df[gender_df['gender'].isna()].copy()
+    print(train_df.shape, pred_df.shape)
 
-# train test split
-x = annotated_df[ft_cols].values
-y = annotated_df[target_col].values
+    # feature, target breakdown
+    ft_cols = train_df.drop(columns = ['gender']).columns.tolist()
+    target_col = 'gender'
 
-x_train, x_test, y_train, y_test = train_test_split(
-    x, 
-    y,
-    test_size = 0.3
-)
+    # train test split
+    x = train_df[ft_cols].values
+    y = train_df[target_col].values
 
-# GBC classifier
-clf = GradientBoostingClassifier()
-
-# train the model
-clf.fit(x_train, y_train)
+    x_train, x_test, y_train, y_test = train_test_split(
+        x, 
+        y,
+        test_size = 0.3
+    )
 
 
-clf_eval(
-    clf,
-    x_test,
-    y_test
-)
+    # GBC classifier
+    clf = GradientBoostingClassifier()
+
+    # train the model
+    clf.fit(x_train, y_train)
+
+    clf_eval(
+        clf,
+        x_test,
+        y_test
+    )
+
+    pred_df['pred_proba'] = pred_df[ft_cols].apply(lambda x : dict(
+        zip(clf.classes_, clf.predict_proba(x.values[None])[0])
+    ), axis = 1)
+    pred_df['pred'] = pred_df[ft_cols].apply(lambda x : clf.predict(x.values[None])[0], axis = 1)
+    
+    pred_df['annotate_decision'] = pred_df['pred_proba'].apply(check_preds)
+    print(pred_df['annotate_decision'].value_counts())
+
+    # breakdown pred_df to annotate and annotated
+    annotated_df = pred_df[pred_df['annotate_decision'] == 'annotated'].copy()
+    annotate_df = pred_df[pred_df['annotate_decision'] == 'annotate'].copy()
+
+    # randomly generate annotation 
+    gender_choices = ['Male', 'Female', np.nan, np.nan, np.nan]
+    annotate_df['gender'] = [random.choice(gender_choices) for _ in range(annotate_df.shape[0])]
+    annotate_df = annotate_df[~annotate_df['gender'].isna()].copy()
+
+    # update labelled data
+    annotated_df['gender'] = annotated_df['pred']
+    annotated_df = pd.concat([annotated_df, annotate_df, train_df])
+    print(annotated_df.shape)
+
+    # feature, target breakdown
+    ft_cols = ['height', 'weight', 'age']
+    target_col = 'gender'
+
+    # train test split
+    x = annotated_df[ft_cols].values
+    y = annotated_df[target_col].values
+
+    x_train, x_test, y_train, y_test = train_test_split(
+        x, 
+        y,
+        test_size = 0.3
+    )
+
+    # GBC classifier
+    clf = GradientBoostingClassifier()
+
+    # train the model
+    clf.fit(x_train, y_train)
 
 
+    clf_eval(
+        clf,
+        x_test,
+        y_test
+    )
+
+
+    
+if __name__ == '__main__':
+    main()
