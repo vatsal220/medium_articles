@@ -1,36 +1,16 @@
-with all_users (user_id, friend_id) as (
-   select
-      user1_id,
-      user2_id
-   from followers
-   union
-   select
-      user1_id,
-      user2_id
-   from followers
-), follower_likes (user_id, song_id, name, artist, like_count) as (
-   select
-      au.user_id, 
-      likes.song_id,
-      songs.name,
-      songs.artist,
-      count(*) as like_count
-   from all_users as au
-   inner join likes on likes.user_id = au.user_id
-   inner join songs on songs.song_id = likes.song_id
-   group by au.user_id, likes.song_id, songs.name, songs.artist
+with all_users as ( 
+  select user1_id as user_id, user2_id as friend_id from followers
+  union
+  select user2_id as user_id, user1_id as friend_id from followers
+), follower_likes as (
+  select au.user_id, l.song_id, count(l.user_id) as like_count
+  from all_users as au 
+  left join likes l on au.friend_id = l.user_id
+  group by au.user_id, l.song_id
 )
-
-select
-   fl.user_id,
-   fl.song_id,
-   fl.like_count,
-   fl.name,
-   fl.artist
+select fl.user_id, fl.song_id, fl.like_count, s.name, s.artist
 from follower_likes as fl
-left join likes on likes.user_id = fl.user_id and fl.song_id = likes.song_id
-where likes.song_id is null
-
-
-
-
+left join likes as l on fl.user_id = l.user_id and fl.song_id = l.song_id
+inner join songs as s on s.song_id = fl.song_id
+where l.song_id is null
+order by fl.user_id, fl.like_count desc
