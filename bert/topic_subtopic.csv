@@ -1,0 +1,72 @@
+topic,subtopic,keywords,gen_model,reasoning
+travel,travel,[],yes,
+travel,africa,[],no,misleading subtopic and keywords
+travel,asia,"['china', 'japan', 'koea', 'thailand']",no,misleading subtopic and keywords
+travel,australia oceania,"['australia', 'oceania']",no,misleading subtopic and keywords
+travel,caribbean,[],no,misleading subtopic and keywords
+travel,europe,"['france', 'united kingdom', 'italy', 'spain', 'rome', 'germany', 'greece']",no,misleading subtopic and keywords
+travel,india,"['bombay', 'goa', 'nepal', 'bangladesh']",no,misleading subtopic and keywords
+travel,mexico,[],no,misleading subtopic and keywords
+travel,middle east,"['united arab emirates', 'dubai', 'iran', 'iraq', 'turkey']",no,misleading subtopic and keywords
+travel,polar,[],no,misleading subtopic and keywords
+travel,south america,"['latin america', 'brazil']",no,misleading subtopic and keywords
+travel,usa,"['united states', 'america']",no,misleading subtopic and keywords
+travel,within canada,"['canada', 'banff', 'toronto', 'ontario', 'quebec']",no,misleading subtopic and keywords
+travel,bnb,"['air bnb', 'bed breakfast', 'air bb']",yes,
+travel,hotel,[],yes,
+travel,motel,[],yes,
+travel,air plane,['airplane'],no,
+travel,bus,"['school bus', 'travel bus', 'bus station', 'train station']",yes,
+travel,cruise,[],no,
+travel,ferry,[],no,
+travel,road trip,[],yes,
+travel,rv,['recreational vehicle'],yes,
+travel,adventure,[],yes,
+travel,beach,['beach house'],yes,
+travel,business,['business trip'],no,
+travel,day trip,[],yes,
+travel,family vacation,['vacation'],yes,
+travel,honeymoon,[],yes,
+travel,spa,[],no,
+travel,fall,[],no,
+travel,spring,[],no,
+travel,summer,[],no,
+travel,winter,[],no,
+entertainment,art photo,"['photo', 'photograph', 'artist', 'painting', 'sculpture']",yes,
+entertainment,books literature,"['books', 'literature', 'best seller', 'biography', 'childrens book', 'kids book', 'cookbook', 'electronic book', 'fan fiction', 'graphic novels', 'magazine', 'poetry', 'romance novels', 'textbook', 'science fiction']",yes,
+entertainment,amusement theme park,"['theme park', 'wonderland']",yes,
+entertainment,award show,['grammy'],yes,
+entertainment,bar restaurant,"['bars', 'restaurant']",yes,
+entertainment,beauty contest,[],no,
+entertainment,business expos conferences,"['business expos', 'conferences']",yes,
+entertainment,casino gamble,"['casino', 'gamble']",yes,
+entertainment,cinema film,"['cinema', 'film', 'toronto international film festival', 'tiff']",yes,
+entertainment,circus,['cirque du soleil'],yes,
+entertainment,comedy shows,['comedy'],yes,
+entertainment,concert,['music concert'],yes,
+entertainment,fairs,[],no,
+entertainment,fan convention,['convention'],yes,
+entertainment,fashion events,[],yes,
+entertainment,festival,['music festival'],yes,
+entertainment,history landmark,['historical landmarks'],yes,
+entertainment,shopping malls,"['shopping', 'square one', 'scarborough town centre']",yes,
+entertainment,museum,"['art gallery', 'galleries']",yes,
+entertainment,musicals,[],yes,
+entertainment,nightclubs,['clubbing'],yes,
+entertainment,nature parks,"['hikers', 'mountain']",yes,
+entertainment,political event,[],no,"not really entertainment, can be misleading"
+entertainment,religious event,[],no,"not really entertainment, can be misleading"
+entertainment,sporting event,"['baseball game', 'basketball game', 'raptors', 'blue jays']",yes,
+entertainment,zoos aquarium,"['aquarium', 'zoo']",yes,
+entertainment,film tv,"['movie', 'theatre', 'animated film', 'hollywood', 'bollywood', 'documentary', 'mystery movie', 'thriller movie', 'drama movie', 'fantasy movie', 'horror movie', 'romantic comedy', 'romance', 'television', 'tv', 'action movie', 'adventure movie', 'film festival', 'movie reviews', 'movie trailers', 'tv programs', 'reality show', 'cartoons']",yes,
+entertainment,dance,[],yes,
+entertainment,digital art,[],yes,
+entertainment,fine art,"['modern art', 'opera']",yes,
+entertainment,instruments,"['musical instrument', 'didjeridoo', 'guitar', 'piano', 'flute', 'saxophone', 'trombone']",yes,
+entertainment,stage performance review,[],no,"dont know what this is, lack of matched articles, probably better to exclude"
+entertainment,celebrations,"['celebrate', 'anniversary', 'baby shower', 'birthday', 'bachelor party', 'bachelorette party', 'funeral', 'graduation', 'wedding']",yes,"strangely enough they put funeral as a celebration, I just ran with it"
+entertainment,music,"['kids music', 'childrens music', 'country music', 'dance music', 'electronic music', 'gospel music', 'hip hop', 'reggae', 'rock music', 'soundcloud', 'soundtrack', 'music composition', 'music theory', 'music award', 'streaming music', 'spotify', 'music industry', 'sheet music']",yes,
+entertainment,performance,"['magic', 'classical ballet', 'theatrical production', 'musical production']",yes,
+entertainment,podcast,"['sports radio', 'talk radio']",yes,
+entertainment,pop culture,"['celebrity death', 'celebrity families', 'celebrity homes', 'celebrity pregnancy', 'celebrity relationship', 'celebrity scandal', 'celebrity style', 'celebrity memes']",yes,
+entertainment,video games,"['gaming', 'gamer', 'action games', 'adventure games', 'educational games', 'mmo rpg games', 'musical games', 'sport games', 'game development', 'vr games', 'mobile game', 'playstation', 'xbox', 'gaming console', 'virtual reality games']",yes,
