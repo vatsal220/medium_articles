@@ -41,75 +41,80 @@ def generate_graph_deg_dist(deg_dist, n):
         return nx.configuration_model(deg_sequence)
     raise ValueError("Probabilities do not equal to 1")
     
-G = generate_graph_deg_dist(
-        deg_dist = {
-            6:0.2,
-            3:0.14,
-            8:0.35,
-            4:0.3,
-            11:0.01
-        },
-        n = 150
-)
-
-print(nx.info(G))
-
-# visualize degree distribution
-plt.clf()
-plt.hist(list(dict(G.degree()).values()))
-plt.title('Degree Distribution')
-plt.show()
-
-# visualize the network -- do not run this step if your network is very large with a lot of edges
-nx.draw(G, node_size = 30)
-
-WINDOW = 1 # Node2Vec fit window
-MIN_COUNT = 1 # Node2Vec min. count
-BATCH_WORDS = 4 # Node2Vec batch words
-
-g_emb = n2v(
-  G,
-  dimensions=16
-)
-
-mdl = g_emb.fit(
-    vector_size = 16,
-    window=WINDOW,
-    min_count=MIN_COUNT,
-    batch_words=BATCH_WORDS
-)
-
-emb_df = (
-    pd.DataFrame(
-        [mdl.wv.get_vector(str(n)) for n in G.nodes()],
-        index = G.nodes
+def main():
+    G = generate_graph_deg_dist(
+            deg_dist = {
+                6:0.2,
+                3:0.14,
+                8:0.35,
+                4:0.3,
+                11:0.01
+            },
+            n = 150
     )
-)
 
-X = emb_df.values
+    print(nx.info(G))
 
-clustering = SpectralClustering(
-    n_clusters=5, 
-    assign_labels='discretize',
-    random_state=0
-).fit(X)
+    # visualize degree distribution
+    plt.clf()
+    plt.hist(list(dict(G.degree()).values()))
+    plt.title('Degree Distribution')
+    plt.show()
 
-print(clustering)
+    # visualize the network -- do not run this step if your network is very large with a lot of edges
+    nx.draw(G, node_size = 30)
+
+    WINDOW = 1 # Node2Vec fit window
+    MIN_COUNT = 1 # Node2Vec min. count
+    BATCH_WORDS = 4 # Node2Vec batch words
+
+    g_emb = n2v(
+      G,
+      dimensions=16
+    )
+
+    mdl = g_emb.fit(
+        vector_size = 16,
+        window=WINDOW,
+        min_count=MIN_COUNT,
+        batch_words=BATCH_WORDS
+    )
+
+    emb_df = (
+        pd.DataFrame(
+            [mdl.wv.get_vector(str(n)) for n in G.nodes()],
+            index = G.nodes
+        )
+    )
+
+    X = emb_df.values
+
+    clustering = SpectralClustering(
+        n_clusters=5, 
+        assign_labels='discretize',
+        random_state=0
+    ).fit(X)
+
+    print(clustering)
 
 
-comm_dct = dict(zip(emb_df.index, clustering.labels_))
+    comm_dct = dict(zip(emb_df.index, clustering.labels_))
 
-unique_coms = np.unique(list(comm_dct.values()))
-cmap = {
-    0 : 'maroon',
-    1 : 'teal',
-    2 : 'black', 
-    3 : 'orange',
-    4 : 'green',
-}
+    unique_coms = np.unique(list(comm_dct.values()))
+    cmap = {
+        0 : 'maroon',
+        1 : 'teal',
+        2 : 'black', 
+        3 : 'orange',
+        4 : 'green',
+    }
 
-node_cmap = [cmap[v] for _,v in comm_dct.items()]
+    node_cmap = [cmap[v] for _,v in comm_dct.items()]
 
-pos = nx.spring_layout(G)
-nx.draw(G, pos, node_size = 30, alpha = 0.8, node_color=node_cmap)
-plt.show()
+    pos = nx.spring_layout(G)
+    nx.draw(G, pos, node_size = 30, alpha = 0.8, node_color=node_cmap)
+    plt.show()
+
+
+if __name__ == '__main__':
+    main()
