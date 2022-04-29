@@ -38,6 +38,11 @@ def generate_graph_deg_dist(deg_dist, n):
             n,
             proba
         )
+        
+        if sum(deg_sequence) % 2 != 0:
+            # to ensure that the degree sequence is always even for the configuration model
+            deg_sequence[1] = deg_sequence[1] + 1
+            
         return nx.configuration_model(deg_sequence)
     raise ValueError("Probabilities do not equal to 1")
     
