@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/vatsalpatel/Desktop/projects/ongoing_projects/medium_articles/ml_flow/mlruns/0/5b308a2b0d2440a1857fad5a5f9b9af7/artifacts
+end_time: 1651250802993
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+name: ''
+run_id: 5b308a2b0d2440a1857fad5a5f9b9af7
+run_uuid: 5b308a2b0d2440a1857fad5a5f9b9af7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1651250799983
+status: 3
+tags: []
+user_id: vatsalpatel
