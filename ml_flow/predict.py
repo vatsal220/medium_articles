@@ -25,8 +25,6 @@ def sample_data(n):
             'age_range' : [randint(1,5) for _ in range(n)],
             'ads_seen' : [randint(5,100) for _ in range(n)],
             'ads_clicked' : [randint(0,15) for _ in range(n)],
-            'rfv_segment' : [choice(['Fanatics', 'Enthusiasts', 'Stable Users', 'Dabblers', 'Flybys', 'Not Engaged']) for _ in range(n)],
-            'user_type' : [choice([np.nan, np.nan, np.nan, 'registered', 'subscriber', '', np.nan]) for _ in range(n)],
             'revenue_generated' : [randint(0, 1000) for _ in range(n)]
         }
     ).drop_duplicates()
