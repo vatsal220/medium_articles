@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import warnings
 import uuid
-import matplotlib.pyplot as plt
 from random import randint
 from random import choice
 from sklearn.ensemble import GradientBoostingClassifier
