@@ -43,13 +43,13 @@ with mlflow.start_run():
     # build model
     lr = 1.0
     n_est = 100
-    clf = GradientBoostingClassifier(
+    gbc = GradientBoostingClassifier(
         n_estimators=n_est, learning_rate=lr,max_depth=1, random_state=0
     ).fit(x_train, y_train)
 
     # evaluate model
-    test_cv = cross_val_score(clf, x_test, y_test, cv=8) 
-    y_pred = clf.predict(x_test)
+    test_cv = cross_val_score(gbc, x_test, y_test, cv=8) 
+    y_pred = gbc.predict(x_test)
     test_acc = accuracy_score(y_test, y_pred)
     rep = classification_report(y_test, y_pred, output_dict = True)
 
@@ -69,4 +69,4 @@ with mlflow.start_run():
         except:
             mlflow.log_metric(str(k), v)
 
-    mlflow.sklearn.log_model(lr, "model")
+    mlflow.sklearn.log_model(gbc, "model")
