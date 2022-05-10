@@ -14,7 +14,8 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 6. [Time Series](#time-series)
 7. [Recommendation Systems](#recommendation-systems)
 8. [Literature Review](#literature-review)
-9. [Projects](#projects)
+9. [Guides](#guides)
+10. [Projects](#projects)
 
 # Graph Networks
 | Title         | Article          | Repository  |
@@ -79,6 +80,15 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 | ------------- |:-------------:   |      :-----:|
 |Mining & Modelling Character Networks Part I | [Link](https://towardsdatascience.com/mining-modelling-character-networks-part-i-e37e4878c467) |
 |Word2Vec Explained | [Link](https://towardsdatascience.com/word2vec-explained-49c52b4ccb71) | [Code](https://github.com/vatsal220/medium_articles/tree/main/w2v)|
+
+
+# Guides
+| Title         | Article          | Repository  |
+| ------------- |:-------------:   |      :-----:|
+|GitHub Guide | [Link](https://towardsdatascience.com/comprehensive-guide-to-github-for-data-scientist-d3f71bd320da) | [Code](https://github.com/vatsal220/git-tutorial) |
+|Virtual Environments w/Conda Guide | [Link](https://towardsdatascience.com/comprehensive-guide-to-python-virtual-environments-using-conda-for-data-scientists-6ebea645c5b) | [Code]() |
+|MLFlow Guide | [Link](https://towardsdatascience.com/comprehensive-guide-to-mlflow-b84086b002ae) | [Code](https://github.com/vatsal220/medium_articles/tree/main/ml_flow) |
+
 
 
 # Projects
