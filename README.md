@@ -15,7 +15,8 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 7. [Recommendation Systems](#recommendation-systems)
 8. [Literature Review](#literature-review)
 9. [Guides](#guides)
-10. [Projects](#projects)
+10. [Active Learning](#active-learning)
+11. [Projects](#projects)
 
 # Graph Networks
 | Title         | Article          | Repository  |
@@ -86,7 +87,8 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 | ------------- |:-------------:   |      :-----:|
 |Mining & Modelling Character Networks Part I | [Link](https://towardsdatascience.com/mining-modelling-character-networks-part-i-e37e4878c467) |
 |Word2Vec Explained | [Link](https://towardsdatascience.com/word2vec-explained-49c52b4ccb71) | [Code](https://github.com/vatsal220/medium_articles/tree/main/w2v)|
-
+|Node2Vec Explained | [Link](https://towardsdatascience.com/node2vec-explained-db86a319e9ab) | [Code](https://github.com/vatsal220/medium_articles/blob/main/n2v/n2v.ipynb) |  
+|The Game of Cops and Robbers on Graph Networks | [Link](https://pub.towardsai.net/game-of-cops-robbers-on-graph-networks-912525090239) | |  
 
 # Guides
 | Title         | Article          | Repository  |
@@ -95,6 +97,11 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 |Virtual Environments w/Conda Guide | [Link](https://towardsdatascience.com/comprehensive-guide-to-python-virtual-environments-using-conda-for-data-scientists-6ebea645c5b) |  |
 |MLFlow Guide | [Link](https://towardsdatascience.com/comprehensive-guide-to-mlflow-b84086b002ae) | [Code](https://github.com/vatsal220/medium_articles/tree/main/ml_flow) |
 
+
+# Active Learning  
+| Title         | Article          | Repository  |
+| ------------- |:-------------:   |      :-----:|
+|Active Learning in Machine Learning Explained | [Link](https://towardsdatascience.com/active-learning-in-machine-learning-explained-777c42bd52fa) | [Code](https://github.com/vatsal220/medium_articles/blob/main/active_learning/active.ipynb) |
 
 
 # Projects
