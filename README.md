@@ -27,6 +27,8 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 |Linear Algebra Explained Through Graph Theory | [Link](https://towardsdatascience.com/linear-algebra-explained-through-graph-theory-1c79711e9a20) |  |
 |Link Prediction Recommendation Engines with Node2Vec | [Link](https://vatsal12-p.medium.com/link-prediction-recommendation-engines-with-node2vec-c97c429351a8) | [Code](https://github.com/vatsal220/medium_articles/blob/main/link_prediction/link_prediction.ipynb) |  
 |Text Summarization in Python w/ Jaro-Winkler Distance & PageRank | [Link](https://medium.com/towards-data-science/text-summarization-in-python-with-jaro-winkler-and-pagerank-72d693da94e8) | [Code](https://github.com/vatsal220/medium_articles/tree/main/graph_summarizer) |
+|Node Classification w/ Node2Vec | [Link](https://towardsdatascience.com/node-classification-with-node2vec-58892845697b) | [Code](https://github.com/vatsal220/medium_articles/blob/main/node_classification/classify_node.ipynb) |
+
 
 # NLP
 | Title         | Article          | Repository  |
@@ -34,6 +36,7 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 |Word2Vec Explained | [Link](https://towardsdatascience.com/word2vec-explained-49c52b4ccb71) | [Code](https://github.com/vatsal220/medium_articles/tree/main/w2v)|
 |Identifying Tweet Sentiment in Python | [Link](https://towardsdatascience.com/identifying-tweet-sentiment-in-python-7c37162c186b) | [Code](https://github.com/vatsal220/medium_articles/blob/main/twitter/tweet_sentiment.py)|
 |Text Summarization in Python w/ Jaro-Winkler Distance & PageRank | [Link](https://medium.com/towards-data-science/text-summarization-in-python-with-jaro-winkler-and-pagerank-72d693da94e8) | [Code](https://github.com/vatsal220/medium_articles/tree/main/graph_summarizer) |
+|Text Similarity w/Levenshtein Distance | [Link](https://towardsdatascience.com/text-similarity-w-levenshtein-distance-in-python-2f7478986e75) | [Code](https://github.com/vatsal220/medium_articles/blob/main/levenshtein_distance/lev_dist.ipynb) |
 
 
 # AB Testing
@@ -73,6 +76,7 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 | ------------- |:-------------:   |      :-----:|
 |Recommendation Systems Explained | [Link](https://towardsdatascience.com/recommendation-systems-explained-a42fc60591ed) | [Code](https://github.com/vatsal220/medium_articles/tree/main/rec_sys)|
 |Link Prediction Recommendation Engines with Node2Vec | [Link](https://vatsal12-p.medium.com/link-prediction-recommendation-engines-with-node2vec-c97c429351a8) | [Code](https://github.com/vatsal220/medium_articles/blob/main/link_prediction/link_prediction.ipynb) | 
+|Collaborative Filtering Music Recommendation System | [Link](https://towardsdatascience.com/build-a-collaborative-filtering-music-recommendation-system-in-sql-d9d955cfde6c) | [Code](https://github.com/vatsal220/medium_articles/tree/main/music_sql_rec_sys) |
 
 
 # Literature Review
@@ -86,7 +90,7 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 | Title         | Article          | Repository  |
 | ------------- |:-------------:   |      :-----:|
 |GitHub Guide | [Link](https://towardsdatascience.com/comprehensive-guide-to-github-for-data-scientist-d3f71bd320da) | [Code](https://github.com/vatsal220/git-tutorial) |
-|Virtual Environments w/Conda Guide | [Link](https://towardsdatascience.com/comprehensive-guide-to-python-virtual-environments-using-conda-for-data-scientists-6ebea645c5b) | [Code]() |
+|Virtual Environments w/Conda Guide | [Link](https://towardsdatascience.com/comprehensive-guide-to-python-virtual-environments-using-conda-for-data-scientists-6ebea645c5b) |  |
 |MLFlow Guide | [Link](https://towardsdatascience.com/comprehensive-guide-to-mlflow-b84086b002ae) | [Code](https://github.com/vatsal220/medium_articles/tree/main/ml_flow) |
 
 
