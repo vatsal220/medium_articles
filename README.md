@@ -22,12 +22,14 @@ If you want to recieve updates when I post new articles, you can subscribe to [m
 | ------------- |:-------------:   |      :-----:|
 |Mining & Modelling Character Networks Part I | [Link](https://towardsdatascience.com/mining-modelling-character-networks-part-i-e37e4878c467) |
 |Mining & Modelling Character Networks Part II | [Link](https://vatsal12-p.medium.com/mining-modelling-character-networks-part-ii-a3d77de89638) | [Code](https://github.com/vatsal220/medium_articles/tree/main/character_networks) |
-|Random Walks with Restart Explained | [Link](https://towardsdatascience.com/random-walks-with-restart-explained-77c3fe216bca) | [Code](https://github.com/vatsal220/medium_articles/tree/main/rwr) |
+|Random Walks with Restart Explained | [Link](https://towardsdatascience.com/random-walks-with-restart-explained-77c3fe216bca) | [Code](https://github.com/vatsal220/medium_articles/tree/main/rwr) |  
 |Node2Vec Explained | [Link](https://towardsdatascience.com/node2vec-explained-db86a319e9ab) | [Code](https://github.com/vatsal220/medium_articles/blob/main/n2v/n2v.ipynb) |  
 |Linear Algebra Explained Through Graph Theory | [Link](https://towardsdatascience.com/linear-algebra-explained-through-graph-theory-1c79711e9a20) |  |
-|Link Prediction Recommendation Engines with Node2Vec | [Link](https://vatsal12-p.medium.com/link-prediction-recommendation-engines-with-node2vec-c97c429351a8) | [Code](https://github.com/vatsal220/medium_articles/blob/main/link_prediction/link_prediction.ipynb) |  
-|Text Summarization in Python w/ Jaro-Winkler Distance & PageRank | [Link](https://medium.com/towards-data-science/text-summarization-in-python-with-jaro-winkler-and-pagerank-72d693da94e8) | [Code](https://github.com/vatsal220/medium_articles/tree/main/graph_summarizer) |
-|Node Classification w/ Node2Vec | [Link](https://towardsdatascience.com/node-classification-with-node2vec-58892845697b) | [Code](https://github.com/vatsal220/medium_articles/blob/main/node_classification/classify_node.ipynb) |
+|Link Prediction Recommendation Engines with Node2Vec | [Link](https://vatsal12-p.medium.com/link-prediction-recommendation-engines-with-node2vec-c97c429351a8) | [Code](https://github.com/vatsal220/medium_articles/blob/main/link_prediction/link_prediction.ipynb) |    
+|Text Summarization in Python w/ Jaro-Winkler Distance & PageRank | [Link](https://medium.com/towards-data-science/text-summarization-in-python-with-jaro-winkler-and-pagerank-72d693da94e8) | [Code](https://github.com/vatsal220/medium_articles/tree/main/graph_summarizer) |  
+|Node Classification w/ Node2Vec | [Link](https://towardsdatascience.com/node-classification-with-node2vec-58892845697b) | [Code](https://github.com/vatsal220/medium_articles/blob/main/node_classification/classify_node.ipynb) |  
+|Community Detection w/ Louvain's Algorithm | [Link](https://towardsdatascience.com/louvains-algorithm-for-community-detection-in-python-95ff7f675306) | [Code](https://github.com/vatsal220/medium_articles/blob/main/louvaine_algo/louvaine.ipynb) |  
+|Community Detection w/ Node2Vec | [Link](https://pub.towardsai.net/community-detection-with-node2vec-6cd5a40c7155) | [Code](https://github.com/vatsal220/medium_articles/blob/main/community_detection/detection.ipynb) |  
 
 
 # NLP
