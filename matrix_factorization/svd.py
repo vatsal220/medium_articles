@@ -40,28 +40,6 @@ def generate_data(n_songs = 1000, n_genres = 5, n_artists = 500, n_users = 3000,
         }
     ).drop_duplicates()
     return d
-  
-# generate data
-d = generate_data(dataset_size = 100000).drop_duplicates()
-d.to_csv('data.csv', index = False)
-
-# convert to user-item matrix
-item_col = 'song_id'
-user_col = 'user_id'
-freq_col = 'n_listen'
-
-mat = d.pivot_table(
-    index = user_col, 
-    columns = item_col, 
-    values = freq_col, 
-    fill_value=0, 
-    aggfunc = 'mean'
-)
-
-print(mat.shape)
-
-# calculate SVD
-u, sigma, v = svd(mat.values)
 
 def cosine_similarity(a, b):
     '''
@@ -122,8 +100,34 @@ def recommend(mat, id_, n_recs):
     sim_dct = get_similarities(mat, id_)
     similar_ids = list(sim_dct.keys())[1:n_recs+1]
     return similar_ids
-  
-# generate recommendations
-id_ = 8
-n_recs = 10
-print(recommend(u, id_, n_recs))
+
+
+def main():
+    # generate data
+    d = generate_data(dataset_size = 100000).drop_duplicates()
+    d.to_csv('data.csv', index = False)
+
+    # convert to user-item matrix
+    item_col = 'song_id'
+    user_col = 'user_id'
+    freq_col = 'n_listen'
+
+    mat = d.pivot_table(
+        index = user_col, 
+        columns = item_col, 
+        values = freq_col, 
+        fill_value=0, 
+        aggfunc = 'mean'
+    )
+    print(mat.shape)
+    
+    # calculate SVD
+    u, sigma, v = svd(mat.values)
+    
+    # generate recommendations
+    id_ = 8
+    n_recs = 10
+    print(recommend(u, id_, n_recs))
+    
+if __name__ == '__main__':
+    main()
