@@ -1,0 +1,4 @@
+matplotlib==3.5.1
+networkx==2.8.7
+node2vec==0.4.6
+karateclub==1.3.3
